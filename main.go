@@ -24,8 +24,7 @@ func main() {
 	urls, err := os.ReadFile("seed-urls.txt")
 
 	if err != nil {
-		fmt.Println("Error when trying to read in file: ", err)
-		return
+		panic("Error when trying to read in seed file : " + err.Error())
 	}
 
 	urls_strs := strings.Split(strings.TrimSpace(string(urls)), "\r\n")
@@ -35,12 +34,7 @@ func main() {
 	if err != nil{
 		panic("Error initilizing visited sites log file.")
 	}
-
 	defer f.Close()
-
-
-	// fmt.Println(urls_strs)
-	// fmt.Println(urls_strs[1])
 
 	for (parsed_urls < SITE_LIMIT) {
 		if len(urls_strs) == 0{
