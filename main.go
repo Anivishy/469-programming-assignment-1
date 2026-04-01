@@ -30,21 +30,31 @@ func main() {
 
 	urls_strs := strings.Split(strings.TrimSpace(string(urls)), "\r\n")
 
+	f, err := os.OpenFile("visited-site-log.txt", os.O_WRONLY | os.O_CREATE |
+	 						os.O_WRONLY, 0644)
+	if err != nil{
+		panic("Error initilizing visited sites log file.")
+	}
+
+	defer f.Close()
+
+
 	// fmt.Println(urls_strs)
 	// fmt.Println(urls_strs[1])
 
 	for (parsed_urls < SITE_LIMIT) {
+		if len(urls_strs) == 0{
+			panic("url list is empty")
+		}
 		cur_url := urls_strs[0]
 		urls_strs = urls_strs[1:]
-		if (validate_url(cur_url)){
-			index_site(cur_url)
+		index_site(cur_url)
 
-			//log site visit, update sites list and increment count of visited 
-			// urls
-			log_site("Visited New Site: ", cur_url)
-			urls_strs = append(urls_strs, get_sites(cur_url)...)
-			parsed_urls ++
-		}
+		//log site visit, update sites list and increment count of visited 
+		// urls
+		log_site("Visited New Site: ", cur_url, f)
+		urls_strs = append(urls_strs, get_sites(cur_url)...)
+		parsed_urls ++
 	}
 }
 
@@ -64,12 +74,11 @@ func normalize_and_get_unique_words(c_url string) []string{
 	return nil //[]string{}
 }
 
-func log_site(message_prefix string, c_url string){
-	//write the message_prefix + c_url string combination to the logfile
-}
-
 func get_sites(c_url string) []string{
 	//returns a list of sites found on the current site (c_url)
+	// use validate_url to filter out already visited sites as they are parsed 
+	// in. Also make sure to update validate_url with each new url that is read 
+	// in
 	return nil //[]string{}
 }
 
@@ -81,4 +90,9 @@ func validate_url(c_url string) bool{
 	}
 	visited_sites[c_url] = c_url
 	return true
+}
+
+func log_site(message_prefix string, c_url string, write_file *os.File){
+	//write the message_prefix + c_url string combination to the logfile
+	write_file.WriteString(message_prefix + c_url + "\n")
 }
