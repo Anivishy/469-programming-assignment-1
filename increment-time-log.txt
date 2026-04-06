@@ -1,0 +1,6 @@
+Time for 10 sites: 3.4179284s
+Time for 100 sites: 28.7361952s
+Time for 1000 sites: 4m23.9185726s
+Time for 10000 sites: 44m11.5072843s
+Time for 100000 sites: 7h31m42.8936157s
+Time for 1000000 sites: 68h52m17.2649381s
