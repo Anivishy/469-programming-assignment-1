@@ -5,7 +5,7 @@ this project is a basic sequential web crawler and indexer written in go for
 it starts from a list of seed urls, visits pages one at a time, extracts words,
 and writes an inverted index to a csv file.
 
-## files
+## Files
 
 - `main.go`: main sequential crawler
 - `seed-urls.txt`: input file with starting urls
@@ -14,7 +14,7 @@ and writes an inverted index to a csv file.
 - `inverted-index.csv`: inverted index output
 - `first-10-keywords-log.txt`: first 10 keywords alphabetically
 
-## how to run
+## How to run
 
 1. put your starting urls in `seed-urls.txt`, one url per line
 2. set the variable`SITE_LIMIT` in `main.go` to the number of sites you want to crawl
@@ -24,7 +24,7 @@ and writes an inverted index to a csv file.
 go run main.go
 ```
 
-## notes
+## Notes
 
 - the crawler is sequential and does not use threads
 - duplicate urls are skipped
