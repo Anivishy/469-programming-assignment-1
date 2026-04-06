@@ -1,4 +1,4 @@
-# project 1
+# Project 1
 
 this project is a basic sequential web crawler and indexer written in go for 
 469.
